@@ -1,24 +1,23 @@
-# Gradle build files
-/.gradle/
-/build/
-src/main/resources/docs/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+_markbind/logs/
 
-# IDEA files
-/.idea/
-/out/
-/*.iml
+# Dependency directories
+node_modules/
 
-# Storage/log files
-/data/
-/config.json
-/preferences.json
-/*.log.*
-hs_err_pid[0-9]*.log
+# Production build files (change if you output the build to a different directory)
+_site/
 
-# Test sandbox files
-src/test/data/sandbox/
+# Env
+.env
+.env.local
 
-# MacOS custom attributes files created by Finder
-.DS_Store
-docs/_site/
-docs/_markbind/logs/
+# IDE configs
+.vscode/
+.idea/*
+*.iml
