@@ -272,15 +272,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile: Student Club EXCO**
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of club members, volunteers and participants across events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+EASync provides a student club manager with a centralised system to efficiently manage members’ and participants’ and volunteers' contact information and events, helping them stay organised. Optimised for users who prefer typing as input, it simplifies management of roles, relationships, and member turnover without relying on slow, cluttered spreadsheets or manual tracking.
 
 
 ### User stories
@@ -302,30 +304,76 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC04: Tag Member with Role**
 
-**MSS**
+**Actor: User**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Preconditions:**
+
+* Both Member and Event exists
+* Member is already assigned to desired event (UC03)
+
+**Guarantees:**
+
+* Member has a role for the event
+
+**MSS:**
+
+1. User requests to tag a member to a certain event role via command line
+2. System displays success message
+3. System displays member with role for the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Missing required parameters in command. (e.g. member index, event name, role name)
+    * 1a1. System informs user of missing fields.
+
+      Use case ends.
+
+* 1b. Incorrect parameters within command. (e.g. member index out of range, event does not exist, role does not exist within the event)
+    * 1b1. System informs user of incorrect parameters.
+
+      Use case ends.
+
+* 1c. Member already has the role for the event tagged to him/her already.
+    * 1c1. System informs user of invalid action.
+
+      Use case ends.
+
+**UC06: Removing an Event**
+
+**Actor: User**
+
+**Preconditions:**
+
+* The event to be removed to must exist in the list of events
+
+**Guarantees:**
+
+* The event is removed from the list of events
+
+**MSS:**
+
+1. User requests to remove an event via command line
+2. System displays success message
+3. System displays event list without the removed event
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Missing required parameters in command (e.g. event index)
+    * 1a1. System informs user of missing fields.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. Incorrect parameters within command (e.g. event index out of range)
+    * 1b1. System informs user of incorrect parameters.
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
