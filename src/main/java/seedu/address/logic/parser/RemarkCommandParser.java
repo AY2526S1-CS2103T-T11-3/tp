@@ -10,7 +10,17 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
 
+/**
+ * Parses input arguments and creates a new {@link RemarkCommand} object.
+ */
 public class RemarkCommandParser implements Parser<RemarkCommand> {
+    /**
+     * Parses the given {@code String} arguments and returns a {@link RemarkCommand}.
+     *
+     * @param args User input string containing the index and optional remark.
+     * @return A {@code RemarkCommand} based on the input.
+     * @throws ParseException If the input format is invalid or the index cannot be parsed.
+     */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
