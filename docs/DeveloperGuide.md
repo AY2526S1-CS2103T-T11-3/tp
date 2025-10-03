@@ -287,51 +287,69 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
+| Priority | As a …​                    | I want to …​                                                    | So that I can…​                                      |
+|----------|----------------------------|-----------------------------------------------------------------|------------------------------------------------------|
+| `* *`    | new user                   | explore sample data                                             | understand how EASync works before committing        |
+| `* *`    | new user                   | see a list of all possible commands                             | know how to carry out what I want to do with the app |
+| `* *`    | user                       | undo the last command                                           | recover from mistakes                                |
+| `* *`    | user                       | edit members' personal details                                  | update them when information changes                 |
+| `* *`    | user                       | restore archived members                                        | re-engage them if they return                        |
+| `* *`    | user                       | validate contact fields (e.g., missing email, malformed tags)   | catch errors before they affect workflows            |
+| `* *`    | club leader                | search for members by their name, email, role, or by events     | find them quickly                                    |
+| `* *`    | club leader                | check the attendance of the club’s members                      | keep track of their overall club participation       |
+| `* *`    | club leader                | bulk edit members details (eg. membership status)               | update records efficiently                           |
+| `* *`    | club leader                | archive members who are no longer active                        | keep my workspace focused on current contributors.   |
+| `* *`    | user                       | view current role distribution across events                    | identify over- or under-utilized members             |
+| `* *`    | user                       | undo recent role changes                                        | recover from planning mistakes                       |
+| `* *`    | user                       | attach notes to a member profile                                | remember preferences, strengths, or past issues      |
+| `* *`    | club leader                | be informed of duplicate events or members when adding new ones | keep member/event lists clean                        |
+| `* *`    | busy/forgetful club leader | be highlighted to important or upcoming events                  | keep track of my schedule                            |
+| `* *`    | club leader                | check upcoming events/list events chronologically               | remember what events are happening when              |
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC02: Adding a Member**
 
+**Actor: User**
+
+**Preconditions:**
+*App is open*
+
+**Guarantees:**
+*Addition of new member will not affect other members in existing list of members*
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add member via command line 
+2. System displays success message 
+3. System displays the new member in the member list
 
-    Use case ends.
+        Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Missing required parameters in member description (e.g. name, phone).
+    * 1a1. System informs user of missing field(s)
 
-  Use case ends.
+            Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. Member with the same name, address, and phone number as an existing member entry is entered in.
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1. System informs user of duplicate.
 
-      Use case resumes at step 2.
+            Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Performance
+    1. All user commands (e.g., addEvent, deleteMember) should be processed within 1 second under normal usage.
+    2. The system should complete data loading from local storage within 2 seconds on startup.
+    3. The executable JAR should operate using less than 100MB of memory under normal usage (e.g., with 100 events and 50 members).
+    4. Assets (e.g., images, libraries) must not be unnecessarily large or included unless strictly required
 
 *{More to be added}*
 
