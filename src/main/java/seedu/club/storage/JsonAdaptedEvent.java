@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.club.commons.exceptions.IllegalValueException;
 import seedu.club.model.event.Event;
-import seedu.club.model.member.Name;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 
 /**

@@ -1,4 +1,4 @@
-package seedu.club.model.member;
+package seedu.club.model.name;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

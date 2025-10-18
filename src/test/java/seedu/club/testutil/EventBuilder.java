@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.club.model.event.Event;
-import seedu.club.model.member.Name;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 import seedu.club.model.util.SampleDataUtil;
 

@@ -1,10 +1,10 @@
-package seedu.club.model.member;
+package seedu.club.model.name;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.club.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Member's name in the club book.
+ * Represents the name of a {@code NamedEntity}.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

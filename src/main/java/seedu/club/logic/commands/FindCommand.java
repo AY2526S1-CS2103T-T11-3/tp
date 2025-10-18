@@ -5,7 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.club.commons.util.ToStringBuilder;
 import seedu.club.logic.Messages;
 import seedu.club.model.Model;
-import seedu.club.model.member.NameContainsKeywordsPredicate;
+import seedu.club.model.member.Member;
+import seedu.club.model.name.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all members in club book whose name contains any of the argument keywords.
@@ -20,9 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicate<Member> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicate<Member> predicate) {
         this.predicate = predicate;
     }
 

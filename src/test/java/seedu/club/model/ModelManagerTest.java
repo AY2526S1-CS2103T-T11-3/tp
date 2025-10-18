@@ -3,8 +3,11 @@ package seedu.club.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.club.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.club.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.club.testutil.Assert.assertThrows;
+import static seedu.club.testutil.TypicalEvents.MOVIE_NIGHT;
+import static seedu.club.testutil.TypicalEvents.ORIENTATION;
 import static seedu.club.testutil.TypicalMembers.ALICE;
 import static seedu.club.testutil.TypicalMembers.BENSON;
 
@@ -15,7 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.club.commons.core.GuiSettings;
-import seedu.club.model.member.NameContainsKeywordsPredicate;
+import seedu.club.model.name.NameContainsKeywordsPredicate;
 import seedu.club.testutil.ClubBookBuilder;
 
 public class ModelManagerTest {
@@ -72,6 +75,7 @@ public class ModelManagerTest {
         assertEquals(path, modelManager.getClubBookFilePath());
     }
 
+    //=========== Member =============================================================
     @Test
     public void hasMember_nullMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasMember(null));
@@ -88,13 +92,15 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasMember(ALICE));
     }
 
+    //=========== Filtered List =============================================================
     @Test
-    public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMemberList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
 
     @Test
-    public void equals() {
+    public void member_equals() {
         ClubBook clubBook = new ClubBookBuilder().withMember(ALICE).withMember(BENSON).build();
         ClubBook differentClubBook = new ClubBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -118,11 +124,74 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate<>(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(clubBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setClubBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(clubBook, differentUserPrefs)));
+    }
+
+    //=========== Event =============================================================
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(ORIENTATION));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(ORIENTATION);
+        assertTrue(modelManager.hasEvent(ORIENTATION));
+    }
+
+    @Test
+    public void deleteEvent_eventNotInAddressBook_returnsTrue() {
+        modelManager.addEvent(ORIENTATION);
+        assertTrue(modelManager.hasEvent(ORIENTATION));
+
+        modelManager.deleteEvent(ORIENTATION);
+        assertFalse(modelManager.hasEvent(ORIENTATION));
+    }
+
+    @Test
+    public void event_equals() {
+        ClubBook clubBook = new ClubBookBuilder().withEvent(ORIENTATION).withEvent(MOVIE_NIGHT).build();
+        ClubBook differentClubBook = new ClubBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(clubBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(clubBook, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        // same object -> returns true
+        assertTrue(modelManager.equals(modelManager));
+
+        // null -> returns false
+        assertFalse(modelManager.equals(null));
+
+        // different types -> returns false
+        assertFalse(modelManager.equals(5));
+
+        // different addressBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentClubBook, userPrefs)));
+
+        // different filteredList -> returns false
+        String[] keywords = ORIENTATION.getName().fullName.split("\\s+");
+        modelManager.updateFilteredEventList(new NameContainsKeywordsPredicate<>(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(clubBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

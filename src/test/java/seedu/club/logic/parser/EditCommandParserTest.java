@@ -34,8 +34,8 @@ import seedu.club.logic.Messages;
 import seedu.club.logic.commands.EditCommand;
 import seedu.club.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.club.model.member.Email;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 import seedu.club.testutil.EditMemberDescriptorBuilder;
 

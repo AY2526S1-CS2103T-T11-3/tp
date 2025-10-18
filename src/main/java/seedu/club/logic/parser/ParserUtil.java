@@ -10,8 +10,8 @@ import seedu.club.commons.core.index.Index;
 import seedu.club.commons.util.StringUtil;
 import seedu.club.logic.parser.exceptions.ParseException;
 import seedu.club.model.member.Email;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 
 /**

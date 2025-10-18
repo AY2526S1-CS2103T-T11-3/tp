@@ -20,9 +20,8 @@ import seedu.club.logic.commands.exceptions.CommandException;
 import seedu.club.model.ClubBook;
 import seedu.club.model.Model;
 import seedu.club.model.event.Event;
-import seedu.club.model.event.EventContainsKeywordsPredicate;
 import seedu.club.model.member.Member;
-import seedu.club.model.member.NameContainsKeywordsPredicate;
+import seedu.club.model.name.NameContainsKeywordsPredicate;
 import seedu.club.testutil.EditMemberDescriptorBuilder;
 
 /**
@@ -125,7 +124,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertEventCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
+                                                 Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -155,7 +154,7 @@ public class CommandTestUtil {
 
         Member member = model.getFilteredMemberList().get(targetIndex.getZeroBased());
         final String[] splitName = member.getName().fullName.split("\\s+");
-        model.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredMemberList(new NameContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredMemberList().size());
     }
@@ -169,7 +168,7 @@ public class CommandTestUtil {
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEventList(new NameContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
     }

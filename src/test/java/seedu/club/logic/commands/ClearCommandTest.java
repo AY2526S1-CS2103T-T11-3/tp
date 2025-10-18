@@ -12,7 +12,7 @@ import seedu.club.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyClubBook_success() {
+    public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyClubBook_success() {
+    public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalClubBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalClubBook(), new UserPrefs());
         expectedModel.setClubBook(new ClubBook());

@@ -34,8 +34,8 @@ import seedu.club.logic.Messages;
 import seedu.club.logic.commands.AddMemberCommand;
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Member;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 import seedu.club.testutil.MemberBuilder;
 

@@ -8,16 +8,17 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.club.commons.util.ToStringBuilder;
+import seedu.club.model.name.Name;
+import seedu.club.model.name.NamedEntity;
 import seedu.club.model.tag.Tag;
 
 /**
  * Represents a Member in the club book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Member {
+public class Member extends NamedEntity {
 
     // Identity fields
-    private final Name name;
     private final Phone phone;
     private final Email email;
 
@@ -28,15 +29,11 @@ public class Member {
      * Every field must be present and not null.
      */
     public Member(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
-        this.name = name;
+        super(name);
+        requireAllNonNull(phone, email, tags);
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-    }
-
-    public Name getName() {
-        return name;
     }
 
     public Phone getPhone() {

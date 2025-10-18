@@ -9,8 +9,8 @@ import seedu.club.model.ReadOnlyClubBook;
 import seedu.club.model.event.Event;
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Member;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 
 /**

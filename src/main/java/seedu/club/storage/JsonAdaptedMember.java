@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.club.commons.exceptions.IllegalValueException;
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Member;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 
 /**

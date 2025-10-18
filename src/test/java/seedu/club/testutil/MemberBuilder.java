@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Member;
-import seedu.club.model.member.Name;
 import seedu.club.model.member.Phone;
+import seedu.club.model.name.Name;
 import seedu.club.model.tag.Tag;
 import seedu.club.model.util.SampleDataUtil;
 

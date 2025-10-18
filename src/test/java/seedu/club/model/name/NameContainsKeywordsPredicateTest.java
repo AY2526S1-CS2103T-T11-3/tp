@@ -1,4 +1,4 @@
-package seedu.club.model.member;
+package seedu.club.model.name;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,23 +10,27 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.club.model.member.Member;
 import seedu.club.testutil.MemberBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class NameContainsKeywordsPredicateTest<T extends NamedEntity> {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
+        NameContainsKeywordsPredicate<T> firstPredicate = new NameContainsKeywordsPredicate<>(
+                firstPredicateKeywordList);
+        NameContainsKeywordsPredicate<T> secondPredicate = new NameContainsKeywordsPredicate<>(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameContainsKeywordsPredicate<T> firstPredicateCopy = new NameContainsKeywordsPredicate<>(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,34 +46,35 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        NameContainsKeywordsPredicate<Member> predicate = new NameContainsKeywordsPredicate<>(
+                Collections.singletonList("Alice"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
+        NameContainsKeywordsPredicate<Member> predicate = new NameContainsKeywordsPredicate<>(Collections.emptyList());
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Carol"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, and email, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").build()));
     }
@@ -77,7 +82,7 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
+        NameContainsKeywordsPredicate<T> predicate = new NameContainsKeywordsPredicate<>(keywords);
 
         String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());

@@ -1,4 +1,4 @@
-package seedu.club.model.member;
+package seedu.club.model.name;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,7 +9,7 @@ import seedu.club.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Member}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Member> {
+public class NameContainsKeywordsPredicate<T extends NamedEntity> implements Predicate<T> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -17,9 +17,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Member> {
     }
 
     @Override
-    public boolean test(Member member) {
+    public boolean test(T entry) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(member.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(entry.getName().fullName, keyword));
     }
 
     @Override
@@ -29,11 +29,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Member> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof NameContainsKeywordsPredicate<?> otherNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
