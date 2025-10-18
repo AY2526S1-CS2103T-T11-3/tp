@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.club.commons.util.ToStringBuilder;
+import seedu.club.model.member.Member;
 import seedu.club.model.member.Name;
 import seedu.club.model.tag.Tag;
 
@@ -24,7 +25,8 @@ public class Event {
     private final String detail;
 
     // Data fields
-    private final Set<Tag> roles = new HashSet<>(); // MVP: No current roles, event roles done in future iterations
+    private final Set<Tag> roles = new HashSet<>();
+    private final Set<Member> roster = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -103,7 +105,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, from, to, detail, roles);
+        return Objects.hash(name, from, to, detail, roles, roster);
     }
 
     @Override
