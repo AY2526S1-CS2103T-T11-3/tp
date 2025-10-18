@@ -111,7 +111,7 @@
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
-        "adding-a-member-add": "Adding a member: add",
+        "adding-a-member-addmember": "Adding a member: addMember",
         "listing-all-members-list": "Listing all members : list",
         "editing-a-member-edit": "Editing a member : edit",
         "locating-members-by-name-find": "Locating members by name: find",
@@ -139,7 +139,7 @@
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-easync": "Project: EASync"
       },
       "headingKeywords": {}
     }
