@@ -8,19 +8,19 @@ Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
-user -[USER_COLOR]> ui : "delete 1"
+user -[USER_COLOR]> ui : "deleteMember 1"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : execute("delete 1")
+ui -[UI_COLOR]> logic : execute("deleteMember 1")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : deleteMember(p)
+logic -[LOGIC_COLOR]> model : deleteMember(member)
 activate model MODEL_COLOR
 
-model -[MODEL_COLOR]-> logic
+model -[MODEL_COLOR]-> logic : member deleted
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : saveAddressBook(clubBook)
+logic -[LOGIC_COLOR]> storage : saveMembers(clubBook)
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file
@@ -31,9 +31,9 @@ deactivate storage
 storage --[STORAGE_COLOR]> logic
 deactivate storage
 
-logic --[LOGIC_COLOR]> ui
+logic --[LOGIC_COLOR]> ui : CommandResult
 deactivate logic
 
-ui--[UI_COLOR]> user
+ui--[UI_COLOR]> user : display message
 deactivate ui
 @enduml
