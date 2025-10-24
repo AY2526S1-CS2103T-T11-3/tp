@@ -1,5 +1,6 @@
 package seedu.club.logic.commands.event;
 
+import static seedu.club.logic.Messages.MESSAGE_EVENTROLE_NAME_NOT_EXIST;
 import static seedu.club.logic.Messages.MESSAGE_EVENT_NAME_NOT_EXIST;
 import static seedu.club.logic.Messages.MESSAGE_MEMBER_NAME_NOT_EXIST;
 import static seedu.club.logic.parser.CliSyntax.PREFIX_EVENT;
@@ -89,14 +90,17 @@ public class UnassignEventCommand extends Command {
         Event event = model.getFullEventList().get(eventIndex);
 
         if (hasRoles) {
-            return executeWithMemberRole(member, roles, model, event);
+            return executeWithEventRole(member, roles, model, event);
         }
 
-        return executeNoMemberRole(member, event, model);
+        return executeNoEventRole(member, event, model);
     }
 
-    private CommandResult executeWithMemberRole(Member member, Set<EventRole> eventRoles,
-                                                Model model, Event event) {
+    private CommandResult executeWithEventRole(Member member, Set<EventRole> eventRoles,
+                                                Model model, Event event) throws CommandException {
+        if (!member.getEventRoles().containsAll(eventRoles)) {
+            throw new CommandException(String.format(MESSAGE_EVENTROLE_NAME_NOT_EXIST, eventRoles.toString()));
+        }
         member.removeEventRole(eventRoles);
         model.updateFilteredEventList(e -> e.equals(event));
         model.updateFilteredMemberList(m -> event.getRoster().contains(m));
@@ -105,7 +109,7 @@ public class UnassignEventCommand extends Command {
                 false, false);
     }
 
-    private CommandResult executeNoMemberRole(Member member, Event event,
+    private CommandResult executeNoEventRole(Member member, Event event,
                                               Model model) {
         member.removeEvent(event);
         event.removeMemberFromRoster(member);

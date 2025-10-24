@@ -1,6 +1,7 @@
 package seedu.club.logic.commands.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.club.logic.Messages.MESSAGE_EVENTROLE_NAME_NOT_EXIST;
 import static seedu.club.logic.Messages.MESSAGE_EVENT_NAME_NOT_EXIST;
 import static seedu.club.logic.Messages.MESSAGE_MEMBER_NAME_NOT_EXIST;
 import static seedu.club.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -32,6 +33,7 @@ public class UnassignEventCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalClubBookWithEventRoles(), new UserPrefs());
     }
+
     @Test
     public void execute_eventDoesNotExist_throwsCommandException() {
         Name memberName = new Name("John");
@@ -50,6 +52,17 @@ public class UnassignEventCommandTest {
                 Collections.emptySet());
         assertCommandFailure(unassignEventCommand, model,
                 String.format(MESSAGE_MEMBER_NAME_NOT_EXIST, memberName));
+    }
+
+    @Test
+    public void execute_eventRoleDoesNotExist_throwsCommandException() {
+        Name memberName = new Name("John");
+        Name eventName = new Name("Orientation");
+        Set<EventRole> roles = Set.of(new EventRole("Publicity"));
+        UnassignEventCommand unassignEventCommand = new UnassignEventCommand(eventName, memberName,
+                roles);
+        assertCommandFailure(unassignEventCommand, model,
+                String.format(MESSAGE_EVENTROLE_NAME_NOT_EXIST, roles.toString()));
     }
 
     @Test
@@ -95,12 +108,14 @@ public class UnassignEventCommandTest {
 
         UnassignEventCommand unassignEventCommand = new UnassignEventCommand(eventName, memberName,
                 Set.of(roleToDelete));
+        boolean bool = model
+                .getFilteredMemberList()
+                .get(INDEX_FIRST_MEMBER.getZeroBased()).getEventRoles().containsAll(Set.of(roleToDelete));
         ModelManager expectedModel = new ModelManager(model.getClubBook(), new UserPrefs());
+        String result = unassignEventCommand.execute(model).getFeedbackToUser();
         expectedModel.getClubBook().getMemberList()
                 .get(INDEX_FIRST_MEMBER.getZeroBased())
                 .removeEventRole(Set.of(roleToDelete));
-
-        String result = unassignEventCommand.execute(model).getFeedbackToUser();
         expectedModel.updateFilteredMemberList(m -> true);
         expectedModel.updateFilteredEventList(e -> true);
         model.updateFilteredMemberList(m -> true);
