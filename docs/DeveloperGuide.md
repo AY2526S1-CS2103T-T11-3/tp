@@ -543,6 +543,168 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends
 
+**UC08: Displaying an event’s details**
+
+**Preconditions**
+
+* The event must exist
+
+**Guarantees**
+
+* Displays a specific event’s member roster
+
+**MSS**
+
+1. User requests to display a specific event
+2. System displays success message
+3. System displays event’s details and member roster
+
+    Use case ends
+
+**Extensions**
+
+* 1a. Missing required parameter in command (e.g. event index)
+
+    * 1a1. System informs user of missing field
+
+        Use case ends
+
+* 1b. Incorrect parameter within command (e.g. event index out of range)
+
+    * 1b1. System informs user of incorrect parameter
+
+        Use case ends
+
+**UC09: Assigning a member to an event**
+
+**Preconditions**
+
+* The member and event must exist
+* The member must not have been already assigned to the event
+
+**Guarantees**
+
+* The member will be added to the event’s roster
+
+**MSS**
+
+1. User requests to assign a member to an event
+2. System displays success message
+3. System updates event’s roster with the assigned member
+4. System displays event’s details(UC08)
+        Use case ends
+
+**Extensions**
+
+* 1a. Missing required parameters in command (e.g. member name)
+
+    * 1a1. System informs user of missing fields
+
+        Use case ends
+
+* 1b. Invalid parameters within command (e.g. blank or non-alphanumeric characters)
+
+    * 1b1. System informs user of invalid parameters
+
+        Use case ends
+
+* 1c. Member is already assigned to the event
+
+    * 1c1. System informs user that the member is already assigned to the event
+
+        Use case ends
+
+* 1d. Event role is specified in user request and event role exists under the event
+
+    * 1d1. System displays success message 
+    * 1d2. System displays event’s roster with the assigned member, with the event role added to the member
+
+        Use case ends
+
+* 1e. Event role is specified in user request but event role does not exist under the event
+
+    * 1e1. System informs user that the event role does not exist under the event
+
+        Use case ends
+
+**UC10: Unassigning a member from an event**
+
+**Preconditions**
+
+* The member and event must exist
+* The member must have already been assigned to the event
+
+**Guarantees**
+
+* The member will be removed from the event’s roster
+* Any event roles that the member may have under that event will also be removed
+
+**MSS**
+
+1. User requests to unassign a member from an event
+2. System displays success message
+3. System displays event’s roster with the unassigned member removed
+        Use case ends
+
+**Extensions**
+
+* 1a. Missing required parameters in command (e.g. member)
+
+    * 1a1. System informs user of missing fields
+
+        Use case ends
+
+* 1b. Invalid parameters within command (e.g. blank or non-alphanumeric characters)
+
+    * 1b1. System informs user of invalid parameters
+
+        Use case ends
+
+* 1c. Member or event does not exist
+
+    * 1c1. System informs user that the member or event cannot be found
+
+        Use case ends
+
+**UC11: Unassigning an event role from a member**
+
+**Preconditions**
+* The member and event must exist 
+* The member must have already been assigned to the event 
+* The member must have an event role related to that event
+
+**Guarantees**
+
+* The event role will be removed from the member’s event roles list
+
+**MSS**
+
+1. User requests to unassign an event role from a member
+2. System displays success message
+3. System displays member list with the member’s event role removed
+        Use case ends
+
+**Extensions**
+
+* 1a. Missing required parameters in command (e.g. event role)
+
+    * 1a1. System informs user of missing fields
+
+        Use case ends
+
+* 1b. Invalid parameters within command (e.g. blank or non-alphanumeric characters)
+
+    * 1b1. System informs user of invalid parameters
+
+        Use case ends
+
+* 1c. Member, event, or event role does not exist
+
+    * 1c1. System informs user that the member, event, or event role cannot be found
+
+        Use case ends
+
+
 ### Non-Functional Requirements
 
 1. Scalability
