@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
+
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
@@ -13,6 +14,9 @@ Class HelpWindow
 Class ResultDisplay
 Class MemberListPanel
 Class MemberCard
+Class EventListPanel
+Class EventCard
+Class SingleEventPanel
 Class StatusBarFooter
 Class CommandBox
 }
@@ -35,26 +39,39 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" MemberListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" EventListPanel
+MainWindow *-down-> "1" SingleEventPanel
 
 MemberListPanel -down-> "*" MemberCard
+EventListPanel -down-> "*" EventCard
 
-MainWindow -left-|> UiPart
+MainWindow --|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
+ResultDisplay -up-|> UiPart
+CommandBox -up-|> UiPart
 MemberListPanel --|> UiPart
-MemberCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+MemberCard -left-|> UiPart
+EventListPanel --|> UiPart
+EventCard --|> UiPart
+SingleEventPanel --|> UiPart
+StatusBarFooter -up-|> UiPart
+HelpWindow -down-|> UiPart
 
-MemberCard ..> Model
+MemberCard .up.> Model
+EventCard .down.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-MemberListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+HelpWindow -[hidden]down- CommandBox
+CommandBox -[hidden]down- ResultDisplay
+ResultDisplay -[hidden]down- StatusBarFooter
+ResultDisplay -[hidden]right- UiPart
+StatusBarFooter -[hidden]right- UiPart
+
+MemberCard -[hidden]up- UiPart
+MemberCard -[hidden]left- CommandBox
+EventCard -[hidden]left- UiPart
+SingleEventPanel -[hidden]down- MemberListPanel
 
 MainWindow -[hidden]-|> UiPart
 @enduml
