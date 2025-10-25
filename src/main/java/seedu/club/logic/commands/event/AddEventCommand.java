@@ -32,8 +32,8 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Coding Workshop "
-            + PREFIX_FROM + "2025-09-30T14:30 "
-            + PREFIX_TO + "2025-09-30T16:30 "
+            + PREFIX_FROM + "30/9/2025 1300 "
+            + PREFIX_TO + "30/9/2025 1700 "
             + PREFIX_DETAIL + "Bring gloves and trash bags "
             + PREFIX_ROLE + "Publicity "
             + PREFIX_ROLE + "ProjectDirector ";

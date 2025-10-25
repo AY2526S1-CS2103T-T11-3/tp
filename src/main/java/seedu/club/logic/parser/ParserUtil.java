@@ -2,6 +2,13 @@ package seedu.club.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +16,7 @@ import java.util.Set;
 import seedu.club.commons.core.index.Index;
 import seedu.club.commons.util.StringUtil;
 import seedu.club.logic.parser.exceptions.ParseException;
+import seedu.club.model.event.DateTime;
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Phone;
 import seedu.club.model.name.Name;
@@ -138,12 +146,25 @@ public class ParserUtil {
      * Parses a {@code String date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException if the given {@code datetime} is invalid.
      */
-    public static String parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        return trimmedDate;
+    public static DateTime parseDate(String datetime) throws ParseException {
+        requireNonNull(datetime);
+        String trimmedDateTime = datetime.trim();
+        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDateTime);
+    }
+
+    /**
+     * Formats the {@code DateTime} into a readable string.
+     */
+    public static String formatDate(DateTime date) {
+        if (date == null) {
+            return "";
+        }
+        return date.toString();
     }
 
     /**

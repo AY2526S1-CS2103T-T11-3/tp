@@ -8,6 +8,7 @@ import static seedu.club.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.club.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.club.logic.commands.event.AddEventCommand;
@@ -16,6 +17,7 @@ import seedu.club.logic.parser.ArgumentTokenizer;
 import seedu.club.logic.parser.Parser;
 import seedu.club.logic.parser.ParserUtil;
 import seedu.club.logic.parser.exceptions.ParseException;
+import seedu.club.model.event.DateTime;
 import seedu.club.model.event.Event;
 import seedu.club.model.name.Name;
 import seedu.club.model.role.EventRole;
@@ -40,10 +42,8 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_FROM, PREFIX_TO, PREFIX_DETAIL);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String from = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
-        String to = argMultimap.getValue(PREFIX_TO).isPresent()
-                    ? ParserUtil.parseDate(argMultimap.getValue(PREFIX_TO).get())
-                    : "";
+        DateTime from = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FROM).get());
+        Optional<DateTime> to = argMultimap.getValue(PREFIX_TO).map(DateTime::new);
         String detail = argMultimap.getValue(PREFIX_DETAIL).isPresent()
                         ? ParserUtil.parseDetail(argMultimap.getValue(PREFIX_DETAIL).get())
                         : "";

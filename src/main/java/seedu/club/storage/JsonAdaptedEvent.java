@@ -1,8 +1,11 @@
 package seedu.club.storage;
 
+import static java.util.Optional.of;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.club.commons.exceptions.IllegalValueException;
+import seedu.club.model.event.DateTime;
 import seedu.club.model.event.Event;
 import seedu.club.model.member.Member;
 import seedu.club.model.name.Name;
@@ -51,8 +55,10 @@ class JsonAdaptedEvent {
 
     public JsonAdaptedEvent(Event source) {
         name = source.getName().fullName;
-        from = source.getFrom();
-        to = source.getTo();
+        from = source.getFrom().value;
+        to = Optional.ofNullable(source.getTo())
+                .map(dt -> dt.value)
+                .orElse("");
         details = source.getDetail();
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedEventRole::new)
@@ -89,12 +95,12 @@ class JsonAdaptedEvent {
         if (from == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
-        final String modelFrom = this.from;
+        final DateTime modelFrom = new DateTime(this.from);
 
         if (to == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
-        final String modelTo = this.to;
+        final Optional<DateTime> modelTo = of(new DateTime(this.to));
 
         if (details == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));

@@ -5,6 +5,7 @@ import static seedu.club.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.club.commons.util.ToStringBuilder;
@@ -20,8 +21,8 @@ import seedu.club.model.role.EventRole;
 public class Event extends NamedEntity {
 
     // Identity fields
-    private final String from; // MVP: Store as string for now
-    private final String to; // MVP: Store as string for now
+    private final DateTime from;
+    private final Optional<DateTime> to;
     private final String detail;
 
     // Data fields
@@ -32,7 +33,8 @@ public class Event extends NamedEntity {
      * Creates an Event containing no participating members
      * Every field must be present and not null.
      */
-    public Event(Name name, String from, String to, String detail, Set<EventRole> roles) {
+    public Event(Name name, DateTime from, Optional<DateTime> to,
+                 String detail, Set<EventRole> roles) {
         super(name);
         requireAllNonNull(from, to, detail, roles);
         this.from = from;
@@ -50,7 +52,8 @@ public class Event extends NamedEntity {
      * Creates an Event with the given roster
      * Every field must be present and not null.
      */
-    public Event(Name name, String from, String to, String detail, Set<EventRole> roles, Set<Member> roster) {
+    public Event(Name name, DateTime from, Optional<DateTime> to,
+                 String detail, Set<EventRole> roles, Set<Member> roster) {
         super(name);
         requireAllNonNull(from, to, detail, roles, roster);
         this.from = from;
@@ -65,12 +68,12 @@ public class Event extends NamedEntity {
         }
     }
 
-    public String getFrom() {
+    public DateTime getFrom() {
         return from;
     }
 
-    public String getTo() {
-        return to;
+    public DateTime getTo() {
+        return to.orElse(null);
     }
 
     public String getDetail() {

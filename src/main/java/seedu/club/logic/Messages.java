@@ -6,7 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.club.logic.parser.ParserUtil;
 import seedu.club.logic.parser.Prefix;
+import seedu.club.model.event.DateTime;
 import seedu.club.model.event.Event;
 import seedu.club.model.member.Member;
 import seedu.club.model.role.EventRole;
@@ -69,11 +71,11 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
                 .append("; From: ")
-                .append(event.getFrom());
+                .append(ParserUtil.formatDate(event.getFrom()));
 
-        String to = event.getTo();
-        if (to != null && !to.isEmpty()) {
-            builder.append("; To: ").append(to);
+        DateTime to = event.getTo();
+        if (to != null) {
+            builder.append("; To: ").append(ParserUtil.formatDate(to));
         }
 
         String detail = event.getDetail();

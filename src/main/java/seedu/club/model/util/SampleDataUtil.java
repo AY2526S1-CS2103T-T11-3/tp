@@ -1,11 +1,13 @@
 package seedu.club.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.club.model.ClubBook;
 import seedu.club.model.ReadOnlyClubBook;
+import seedu.club.model.event.DateTime;
 import seedu.club.model.event.Event;
 import seedu.club.model.member.Email;
 import seedu.club.model.member.Member;
@@ -37,11 +39,14 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-            new Event(new Name("Orientation"), "15/10/2025", "17/10/2025", "For freshmen",
+            new Event(new Name("Orientation"), new DateTime("15/10/2025 1200"),
+                    Optional.of(new DateTime("17/10/2025 1500")), "For freshmen",
                     getEventRoleSet("facilitator", "gamemaster")),
-            new Event(new Name("Movie Night"), "20/10/2025 1800", "20/10/2025 2000", "Showing The Shining",
+            new Event(new Name("Movie Night"), new DateTime("20/10/2025 1800"),
+                    Optional.of(new DateTime("20/10/2025 2000")), "Showing The Shining",
                     getEventRoleSet("FoodIC", "OIC")),
-            new Event(new Name("Beach Day"), "25/10/2025", "25/10/2025", "At Sentosa",
+            new Event(new Name("Beach Day"), new DateTime("25/10/2025 0900"),
+                    Optional.of(new DateTime("25/10/2025 1300")), "At Sentosa",
                     getEventRoleSet("Gamemaster", "SafetyOfficer"))
         };
     }
