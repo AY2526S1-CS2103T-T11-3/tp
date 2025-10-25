@@ -88,8 +88,8 @@ public class AssignEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        event.addMember(member);
         member.addEventRoles(roles);
+        event.addMember(member);
 
         model.setViewState(ViewState.SINGLE_EVENT);
         model.updateFilteredEventList(e -> e.equals(event));

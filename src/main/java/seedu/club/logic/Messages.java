@@ -84,7 +84,9 @@ public class Messages {
         Set<EventRole> roles = event.getRoles();
         if (roles != null && !roles.isEmpty()) {
             builder.append("; Roles: ");
-            roles.forEach(builder::append);
+            String result = roles.stream().map(EventRole::toString)
+                    .collect(joining(", "));
+            builder.append(result);
         }
 
         Set<Member> roster = event.getRoster();
