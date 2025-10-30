@@ -83,7 +83,7 @@ EASync starts with some sample data so you can explore its features right away!
 * **Items with `…`​ after them can be used multiple times, or omitted completely.**<br>
   e.g. `[r/MEMBERROLE]…​` can be `r/Logistics`, `t/Publicity t/Logistics` or not be used at all.
 
-* **For `NAME` and `MEMBERROLE` and `DETAIL` parameters, multiple spaces will be treated as single space.**<br>
+* **For `NAME` and `MEMBERROLE` and `DETAILS` parameters, multiple spaces will be treated as single space.**<br>
   e.g. `n/John     Doe` will be treated as `n/John Doe`.
 </box>
 
@@ -387,6 +387,7 @@ Furthermore, certain edits can cause EASync to behave in unexpected ways (e.g., 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
