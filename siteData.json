@@ -42,6 +42,8 @@
       "headings": {
         "easync-developer-guide": "EASync Developer Guide",
         "acknowledgements": "Acknowledgements",
+        "ideas-code-documentation": "Ideas, Code, Documentation",
+        "third-party-libraries": "Third-Party Libraries",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",
@@ -52,7 +54,7 @@
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "assigning-a-member-to-an-event": "Assigning a member to an event",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
+        "display-event-feature": "Display event feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -62,8 +64,12 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-member": "Deleting a member",
-        "saving-data": "Saving data"
+        "adding-a-member-and-an-event": "Adding a member and an event",
+        "listing-members-and-events": "Listing members and events",
+        "displaying-an-event": "Displaying an event",
+        "deleting-a-member-and-an-event": "Deleting a member and an event",
+        "saving-data": "Saving data",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements"
       },
       "headingKeywords": {}
     },
