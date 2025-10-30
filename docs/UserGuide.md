@@ -77,13 +77,13 @@ EASync starts with some sample data so you can explore its features right away!
   e.g. in `addMember n/NAME`, `NAME` is a parameter which can be used as `addMember n/John Doe`.
 
 * **Items in square brackets are optional**. <br>
-  e.g. `n/NAME [r/ROLE]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
+  e.g. `n/NAME [r/MEMBERROLE]` can be used as `n/John Doe r/Logistics` or as `n/John Doe`.
 
 * **Items with `…`​ after them can be used multiple times, or omitted completely.**<br>
-  e.g. `[t/TAG]…​` can be `t/friend`, `t/friend t/family` or not be used at all etc.
+  e.g. `[r/MEMBERROLE]…​` can be `r/Logistics`, `t/Publicity t/Logistics` or not be used at all.
 
-* **For `NAME` and `ROLE` parameters, multiple spaces will be treated as single space.**<br>
-e.g. `n/John     Doe` will be treated as `n/John Doe`.
+* **For `NAME` and `MEMBERROLE` parameters, multiple spaces will be treated as single space.**<br>
+  e.g. `n/John     Doe` will be treated as `n/John Doe`.
 </box>
 
 <box type="tip">
@@ -102,7 +102,7 @@ e.g. `n/John     Doe` will be treated as `n/John Doe`.
 **Handling duplicates:** <br>
 
 * All names (such as member names, event names, and event role names etc.) are considered duplicates if they have the **same spelling and spacing, ignoring letter case.**<br>
-  e.g. `John123 Doe` and `john123 doe` are the same, but `John123 Doe` and `John123Doe` are different.
+  e.g. `John Doe` and `john doe` are the same, but `John Doe` and `JohnDoe` are different.
 </box>
 
 ### Viewing help : `help`
@@ -123,18 +123,18 @@ Format: `listMembers`
 
 #### Adding a member: `addMember`
 
-Format: `addMember n/NAME p/PHONE e/EMAIL [r/ROLE]…​`
+Format: `addMember n/NAME p/PHONE e/EMAIL [r/MEMBERROLE]…​`
 
 * `NAME` should be 50 characters or fewer.
 * `PHONE` number should start with **6, 8 or 9** and have exactly 8 digits only.
 * `EMAIL` must be of the format `local-part@domain`
-* If multiple `ROLE`s are specified, the app displays them in alphabetical order.
-* Each `ROLE` should be 30 characters or fewer.
+* If multiple `MEMBERROLE`s are specified, the app displays them in alphabetical order.
+* Each `MEMBERROLE` should be 30 characters or fewer.
 * The new member will be added to the end of the list.
 
 Examples:
 * `addMember n/Alice Pauline p/94351253 e/alice@example.com r/member`
-* `addMember n/Benson Meier r/treasurer e/benson@example.com p/98765432 r/publicity`
+* `addMember n/Benson Meier r/treasurer e/benson@example.com p/98765432 r/Publicity`
 
 <box type="info">
 
@@ -154,11 +154,11 @@ Format: `deleteMember INDEX`
 
 Examples:
 * `listMembers` then `deleteMember 2` removes the 2nd member in the displayed member list.
-* `find Andy` then `deleteMember 1` removes the 1st member in the **search result**.
+* `find Andy` then `deleteMember 1` removes the 1st member in the **search result** for members containing the keyword `Andy`.
 
 #### Editing a member: `editMember`
 
-Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
+Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/MEMBERROLE]…​`
 
 * Edits the details of the member at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed member list.
@@ -172,7 +172,7 @@ Examples:
 
 <box type="tip">
 
-**Tip:** You can remove all the member’s roles by typing `r/` without specifying any roles after it.
+**Tip:** You can remove all member roles by typing `r/` without specifying any roles after it.
 </box>
 
 <box type="warning">
@@ -247,7 +247,7 @@ Format: `editEvent INDEX [n/NAME] [f/DATE_TIME] [t/DATE_TIME] [d/DETAILS]`
 
 
 Examples:
-*  `editEvent 1 n/Movie Night t/171025 1800` Edits the name and end date time of the 1st event to be `Movie Night` and `171025 1800` respectively.
+*  `editEvent 1 n/Movie Night t/171025 1800` edits the name and end date time of the 1st event to be `Movie Night` and `171025 1800` respectively.
 
 #### Locating events by name: `findEvent`
 
@@ -261,7 +261,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findEvent workshop` returns `Coding Workshop` and `Writing workshop`
-* `findEvent day camp` returns `Beach Day`, `Scout camp`<br>
+* `findEvent day camp` returns `Beach Day`, `Scout camp`
 
 <box type="warning">
 
@@ -387,16 +387,15 @@ Furthermore, certain edits can cause EASync to behave in unexpected ways (e.g., 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Command summary
 
 | Action                  | Format, Examples                                                                                                                                    |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | **List Members**        | `listMembers`                                                                                                                                       |
-| **Add Member**          | `addMember n/NAME p/PHONE e/EMAIL [r/ROLE]…​` <br> e.g, `addMember n/John Doe p/94824271 e/john@example.com`                                        |
+| **Add Member**          | `addMember n/NAME p/PHONE e/EMAIL [r/MEMBERROLE]…​` <br> e.g, `addMember n/John Doe p/94824271 e/john@example.com`                                  |
 | **Delete Member**       | `deleteMember INDEX`<br> e.g., `deleteMember 3`                                                                                                     |
-| **Edit Member**         | `editMember INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROLE]…​`<br> e.g.,`editMember 2 n/James Lee e/jameslee@example.com`                        |
+| **Edit Member**         | `editMember INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/MEMBERROLE]…​`<br> e.g.,`editMember 2 n/James Lee e/jameslee@example.com`                  |
 | **Find Members**        | `findMember KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                    |
 | **List Events**         | `listEvents`                                                                                                                                        |
 | **Add Event**           | `addEvent n/NAME f/DATE_TIME t/DATE_TIME [d/DETAILS] [r/EVENTROLE]…​`  <br> e.g., `addEvent n/Orientation f/151025 1200 t/171025 1800 r/gamemaster` |
