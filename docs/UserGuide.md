@@ -352,7 +352,7 @@ EASync saves new data to the hard disk automatically, after any command is run. 
 
 ### Editing the data file
 
-Easync data is saved automatically as a JSON file in `[JAR file location]/data/clubbook.json`.
+Easync data is saved automatically as a JSON file in `[JAR file location]/data/clubBook.json`.
 
 **Advanced users** are welcome to update data directly by editing that data file.
 
