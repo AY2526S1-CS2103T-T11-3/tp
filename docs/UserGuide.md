@@ -17,7 +17,7 @@ You do not need to be a programmer or technical expert. Using EASync is like sen
 
 ## Quick start
 
-1. **Set up Java**<br>
+1. **Set up Java** <br>
 To run EASync, your computer needs to have Java version 17 or higher installed. Using the step-by-step guides [here](https://se-education.org/guides/tutorials/javaInstallation.html), you can:
     * Check if Java is already installed on your computer. 
     * Install the correct version if needed. 
@@ -27,7 +27,7 @@ To run EASync, your computer needs to have Java version 17 or higher installed. 
    Go to [our releases page on GitHub](https://github.com/AY2526S1-CS2103T-T11-3/tp/releases) to download the latest `EASync.jar` file.
 
 3. **Choose a Folder for EASync** <br>
-   * Create or pick a folder where you’d like to keep your EASync files. 
+   * Create or pick a folder where you would like to keep your EASync files. 
    * Then, move the `EASync.jar` file you just downloaded into that folder. <br>
    📁 Example: You could create a folder on your Desktop called `EASync`.
 
@@ -71,12 +71,12 @@ EASync starts with some sample data so you can explore its features right away!
 
 <box type="info">
 
-**Notes about the command format:**<br>
+**Notes about the command format:** <br>
 
 * **Words in `UPPER_CASE` are the parameters that you type in.**<br>
   e.g. in `addMember n/NAME`, `NAME` is a parameter which can be used as `addMember n/John Doe`.
 
-* **Items in square brackets are optional**.<br>
+* **Items in square brackets are optional**. <br>
   e.g. `n/NAME [r/ROLE]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * **Items with `…`​ after them can be used multiple times, or omitted completely.**<br>
@@ -86,11 +86,9 @@ EASync starts with some sample data so you can explore its features right away!
 e.g. `n/John     Doe` will be treated as `n/John Doe`.
 </box>
 
-
-
 <box type="tip">
 
-**Tips for command flexibility:**<br>
+**Tips for command flexibility:** <br>
 
 * **Parameters can be in any order.**<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -101,8 +99,10 @@ e.g. `n/John     Doe` will be treated as `n/John Doe`.
 
 <box type="warning">
 
-**Caution:**
-If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+**Handling duplicates:** <br>
+
+* All names (such as member names, event names, and event role names etc.) are considered duplicates if they have the **same spelling and spacing, ignoring letter case.**<br>
+  e.g. `John123 Doe` and `john123 doe` are the same, but `John123 Doe` and `John123Doe` are different.
 </box>
 
 ### Viewing help : `help`
@@ -125,12 +125,12 @@ Format: `listMembers`
 
 Format: `addMember n/NAME p/PHONE e/EMAIL [r/ROLE]…​`
 
-* The new member will be added to the end of the list.
 * `NAME` should be 50 characters or fewer.
 * `PHONE` number should start with **6, 8 or 9** and have exactly 8 digits only.
 * `EMAIL` must be of the format `local-part@domain`
 * If multiple `ROLE`s are specified, the app displays them in alphabetical order.
 * Each `ROLE` should be 30 characters or fewer.
+* The new member will be added to the end of the list.
 
 Examples:
 * `addMember n/Alice Pauline p/94351253 e/alice@example.com r/member`
@@ -143,7 +143,7 @@ Examples:
 2. The `domain` consists of one or more domain labels separated by periods (.). The `domain` must meet the following rules:
     * It must end with a domain label that is at least 2 characters long
     * Each domain label may contain letters and/or digits, optionally separated by hyphens (-).
-      </box>
+</box>
 
 #### Deleting a member: `deleteMember`
 
@@ -151,7 +151,6 @@ Format: `deleteMember INDEX`
 
 * Deletes the member at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed member list.
-* `INDEX` **must be a positive integer** e.g. 1,2,3, …​
 
 Examples:
 * `listMembers` then `deleteMember 2` removes the 2nd member in the displayed member list.
@@ -162,15 +161,14 @@ Examples:
 Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
 * Edits the details of the member at the specified `INDEX`.
-* `INDEX` refers to the index number shown in the displayed member list. 
-* `INDEX` **must be a positive integer** e.g. 1, 2, 3, …​
+* `INDEX` refers to the index number shown in the displayed member list.
 * At least one of the optional fields must be provided.
 * Existing values for the provided field will be updated to the input values.
 * Fields not provided will remain **unchanged**.
 
 Examples:
-*  `editMember 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-*  `editMember 2 n/Betsy Crower r/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing roles.
+*  `editMember 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+*  `editMember 2 n/Betsy Crower r/` edits the name of the 2nd member to be `Betsy Crower` and clears all existing roles.
 
 <box type="tip">
 
@@ -187,7 +185,7 @@ Examples:
 Format: `findMember KEYWORD [MORE_KEYWORDS]`
 
 * Finds members whose names contain any of the given keywords.
-* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Searching is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Members matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -214,13 +212,13 @@ Format: `listEvents`
 
 Format: `addEvent n/NAME f/DATE_TIME t/DATE_TIME [d/DETAILS] [r/EVENTROLE]…​`
 
-* The new event will be added to the end of the list.
 * `NAME` should be 50 characters or fewer.
 * `f/` (from) represents the start date time and `t/` (to) the end date time of the event.
 * `DATE_TIME` must be in the following format: `DDMMYY HHMM` (24 hour)
 * `DETAILS` should be 500 characters or fewer.
 * If multiple `EVENTROLE`s are specified, the app displays them in alphabetical order.
 * The `EVENTROLE` should be 30 characters or fewer.
+* The new event will be added to the end of the list.
 
 
 Examples:
@@ -233,19 +231,17 @@ Format: `deleteEvent INDEX`
 
 * Deletes the event at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed event list.
-* `INDEX` **must be a positive integer** e.g. 1,2,3, ...​
 
 Examples:
 * `listEvents` then `deleteEvent 2` removes the 2nd event in the displayed event list.
 
-#### Editing a member: `editEvent`
+#### Editing an event: `editEvent`
 
-Format: `editMember INDEX [n/NAME] [f/DATE_TIME] [t/DATE_TIME] [d/DETAILS]`
+Format: `editEvent INDEX [n/NAME] [f/DATE_TIME] [t/DATE_TIME] [d/DETAILS]`
 
 * Edits the details of the event at the specified `INDEX`.
-* `INDEX` refers to the index number shown in the displayed member list.
-* `INDEX` **must be a positive integer** e.g. 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* `INDEX` refers to the index number shown in the displayed event list.
+* **At least one of the optional fields must be provided.**
 * Existing values for the provided field will be updated to the input values.
 * Fields not provided will remain **unchanged**.
 
@@ -258,7 +254,7 @@ Examples:
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
 * Finds events whose names contain any of the given keywords.
-* The search is case-insensitive. e.g. `orientation` will match `Orientation`
+* Searching is case-insensitive. e.g. `orientation` will match `Orientation`
 * The order of the keywords does not matter. e.g. `Orientation Day` will match `Day Orientation`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Orientation Day` will return `Orientation`, `Beach Day`
@@ -279,7 +275,6 @@ Format: `event INDEX`
 
 *  Displays the event at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed event list.
-* `INDEX` **must be a positive integer 1,2,3, ...​**
 
 Examples:
 * `listEvents` then `event 2` displays the full content of the 2nd event in the displayed event list.
