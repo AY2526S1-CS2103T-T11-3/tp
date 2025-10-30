@@ -83,7 +83,7 @@ EASync starts with some sample data so you can explore its features right away!
 * **Items with `…`​ after them can be used multiple times, or omitted completely.**<br>
   e.g. `[r/MEMBERROLE]…​` can be `r/Logistics`, `t/Publicity t/Logistics` or not be used at all.
 
-* **For `NAME` and `MEMBERROLE` parameters, multiple spaces will be treated as single space.**<br>
+* **For `NAME` and `MEMBERROLE` and `DETAIL` parameters, multiple spaces will be treated as single space.**<br>
   e.g. `n/John     Doe` will be treated as `n/John Doe`.
 </box>
 
