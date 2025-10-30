@@ -14,6 +14,7 @@ You do not need to be a programmer or technical expert. Using EASync is like sen
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -193,7 +194,6 @@ Format: `findMember KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findMember John` returns `john` and `John Doe`
 * `findMember alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <box type="warning">
 
