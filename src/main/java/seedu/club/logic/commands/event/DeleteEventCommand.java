@@ -63,6 +63,8 @@ public class DeleteEventCommand extends Command {
         // but is there as a safety measure.
         model.setViewState(ViewState.EVENT);
         model.deleteEvent(eventToDelete);
+        model.updateFilteredEventList(e -> true);
+        model.updateFilteredMemberList(m -> true);
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 
