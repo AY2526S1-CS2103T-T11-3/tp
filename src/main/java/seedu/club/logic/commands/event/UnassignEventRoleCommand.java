@@ -99,7 +99,7 @@ public class UnassignEventRoleCommand extends Command {
         model.updateFilteredEventList(e -> e.equals(event));
         model.updateFilteredMemberList(m -> true);
         model.updateFilteredMemberList(m -> event.getRoster().contains(m));
-        model.setViewState(ViewState.MEMBER);
+        model.setViewState(ViewState.SINGLE_EVENT);
         return new CommandResult(String.format(MESSAGE_SUCCESS_EVENT_ROLE),
                 false, false);
     }
