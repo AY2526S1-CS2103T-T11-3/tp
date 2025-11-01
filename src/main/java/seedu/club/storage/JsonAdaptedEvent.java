@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
 import seedu.club.commons.exceptions.IllegalValueException;
+import seedu.club.logic.Messages;
 import seedu.club.model.event.DateTime;
 import seedu.club.model.event.Event;
 import seedu.club.model.member.Member;
@@ -119,6 +120,10 @@ class JsonAdaptedEvent {
             modelTo = new DateTime(to);
         } catch (IllegalArgumentException e) {
             throw new IllegalValueException(e.getMessage());
+        }
+
+        if (!modelFrom.isBefore(modelTo)) {
+            throw new IllegalValueException(Messages.MESSAGE_END_BEFORE_START_DATE);
         }
 
         if (details == null) {

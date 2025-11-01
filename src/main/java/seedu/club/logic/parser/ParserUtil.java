@@ -153,7 +153,7 @@ public class ParserUtil {
     public static DateTime parseDateTime(String datetime) throws ParseException {
         requireNonNull(datetime);
 
-        String trimmedDateTime = datetime.trim();
+        String trimmedDateTime = normalizeAndTrimWhitespace(datetime);
         if (!DateTime.isValidFormat(trimmedDateTime)) {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
