@@ -13,7 +13,7 @@ public abstract class Role {
     public static final int FIELD_LENGTH = 30;
     public static final String MESSAGE_CONSTRAINTS =
             "Role names should only contain alphanumeric characters and spaces, "
-                    + "be within 50 characters, and should not be blank";
+                    + "be within 30 characters, and should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String roleName;
