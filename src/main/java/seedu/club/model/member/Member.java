@@ -97,10 +97,11 @@ public class Member extends NamedEntity {
      * Iterate through the given set of event roles. Removes event roles that belong to
      * the old event name in the member's event list and replaces them.
      */
-    public Member updateEditedEventRolesList(Set<EventRole> updatedRoles, Name oldName) {
+    public Member updateEditedEventRolesList(Set<EventRole> updatedRoles, Name oldName, Name updatedName) {
         Set<EventRole> newRoles = new HashSet<>();
         for (EventRole role : eventRoles) {
             if (role.getAssignedTo().equals(oldName)) {
+                handleParticipant(newRoles, updatedName, role);
                 updatedRoles.stream()
                         .filter(r -> r.roleName.equals(role.roleName))
                         .findFirst()
@@ -114,6 +115,12 @@ public class Member extends NamedEntity {
         eventRoles.addAll(newRoles);
 
         return this;
+    }
+
+    private void handleParticipant(Set<EventRole> newRoles, Name updatedName, EventRole role) {
+        if (role.isParticipant()) {
+            newRoles.add(new EventRole(updatedName));
+        }
     }
 
     /**

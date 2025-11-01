@@ -38,6 +38,10 @@ public class EventRole extends Role {
         return assignedTo;
     }
 
+    public boolean isParticipant() {
+        return this.isParticipant;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
