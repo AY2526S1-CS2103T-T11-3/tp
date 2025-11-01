@@ -17,6 +17,7 @@ import seedu.club.model.Model;
 import seedu.club.model.ModelManager;
 import seedu.club.model.UserPrefs;
 import seedu.club.model.event.Event;
+import seedu.club.model.member.Member;
 import seedu.club.model.name.Name;
 
 
@@ -76,11 +77,12 @@ public class UnassignEventCommandTest {
 
     @Test
     public void execute_unassignEventWithNoEventRoles_success() throws CommandException {
-        Name eventName = new Name("Movie Night");
-        Name memberName = new Name("Benson Meier");
+        Name eventName = new Name("Orientation");
+        Name memberName = new Name("Alice Pauline");
 
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-
+        Member member = model.getFilteredMemberList().get(0);
+        eventToDelete.addMember(member);
         UnassignEventCommand unassignEventCommand = new UnassignEventCommand(eventName, memberName);
         String result = unassignEventCommand.execute(model).getFeedbackToUser();
 

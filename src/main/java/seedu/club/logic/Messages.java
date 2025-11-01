@@ -37,6 +37,8 @@ public class Messages {
     public static final String MESSAGE_MEMBER_NAME_NOT_EXIST = "The member with the name provided does not exist: %1$s";
     public static final String MESSAGE_EVENTROLE_NAME_NOT_EXIST = "The event role(s) belonging to %1$s with the name(s)"
             + " provided does not exist: %2$s";
+    public static final String MESSAGE_MEMBER_NAME_NOT_IN_EVENT_ROSTER = "The member %1$s is not "
+            + "assigned to the event: %2$s";
 
     public static final String MESSAGE_END_BEFORE_START_DATE = "Starting date/time should be before ending date/time";
 

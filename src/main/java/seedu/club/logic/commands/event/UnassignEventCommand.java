@@ -2,6 +2,7 @@ package seedu.club.logic.commands.event;
 
 import static seedu.club.logic.Messages.MESSAGE_EVENT_NAME_NOT_EXIST;
 import static seedu.club.logic.Messages.MESSAGE_MEMBER_NAME_NOT_EXIST;
+import static seedu.club.logic.Messages.MESSAGE_MEMBER_NAME_NOT_IN_EVENT_ROSTER;
 import static seedu.club.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.club.logic.parser.CliSyntax.PREFIX_MEMBER;
 
@@ -70,6 +71,10 @@ public class UnassignEventCommand extends Command {
         }
         Member member = model.getFullMemberList().get(memberIndex);
         Event event = model.getFullEventList().get(eventIndex);
+        if (!event.getRoster().contains(member)) {
+            throw new CommandException(String.format(MESSAGE_MEMBER_NAME_NOT_IN_EVENT_ROSTER,
+                    memberName, eventName));
+        }
 
 
         member.removeEvent(event);
