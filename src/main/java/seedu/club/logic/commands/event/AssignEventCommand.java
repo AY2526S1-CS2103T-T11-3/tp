@@ -61,8 +61,7 @@ public class AssignEventCommand extends Command {
         // Check if event exists
         int eventIndex = model.eventNameIndex(eventName);
         if (eventIndex == -1) {
-            return new CommandResult(String.format(Messages.MESSAGE_EVENT_NAME_NOT_EXIST, eventName),
-                    false, false);
+            throw new CommandException(String.format(Messages.MESSAGE_EVENT_NAME_NOT_EXIST, eventName));
         }
         Event event = model.getFullEventList().get(eventIndex);
 
@@ -70,15 +69,14 @@ public class AssignEventCommand extends Command {
         Set<EventRole> missingRoles = new HashSet<>(roles);
         missingRoles.removeAll(event.getRoles());
         if (!missingRoles.isEmpty()) {
-            return new CommandResult(String.format(
+            throw new CommandException(String.format(
                     Messages.MESSAGE_EVENTROLE_NAME_NOT_EXIST, event.getName(), missingRoles));
         }
 
         // Check if member exists
         int memberIndex = model.memberNameIndex(memberName);
         if (memberIndex == -1) {
-            return new CommandResult(String.format(Messages.MESSAGE_MEMBER_NAME_NOT_EXIST, memberName),
-                    false, false);
+            throw new CommandException(String.format(Messages.MESSAGE_MEMBER_NAME_NOT_EXIST, memberName));
         }
         Member member = model.getFullMemberList().get(memberIndex);
 
@@ -87,7 +85,16 @@ public class AssignEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        Set<EventRole> rolesToAssign = new HashSet<>(roles);
+        Set<EventRole> rolesToAssign = new HashSet<>();
+        // Replace user-supplied roles with event's actual role objects
+        for (EventRole roleFromUser : roles) {
+            for (EventRole roleFromEvent : event.getRoles()) {
+                if (roleFromEvent.equals(roleFromUser)) { // uses equalsIgnoreCase
+                    rolesToAssign.add(roleFromEvent);
+                    break;
+                }
+            }
+        }
 
         // Handle no role provided, roles is empty so add an "unassigned" role
         if (rolesToAssign.isEmpty()) {
@@ -102,7 +109,7 @@ public class AssignEventCommand extends Command {
         model.updateFilteredEventList(e -> e.equals(event));
         model.updateFilteredMemberList(m -> event.getRoster().contains(m));
 
-        return new CommandResult(Messages.formatAssignRole(member, event, roles));
+        return new CommandResult(Messages.formatAssignRole(member, event, rolesToAssign));
     }
 
     @Override

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.club.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.club.logic.commands.CommandTestUtil.VALID_MEMBER_NAME_BOB;
 import static seedu.club.logic.commands.CommandTestUtil.VALID_MEMBER_ROLE_PRESIDENT;
+import static seedu.club.logic.commands.CommandTestUtil.VALID_MEMBER_ROLE_TREASURER;
 import static seedu.club.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.club.testutil.Assert.assertThrows;
 import static seedu.club.testutil.TypicalClubBook.ALICE;
@@ -81,7 +82,7 @@ public class MemberTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different roles -> returns false
-        editedAlice = new MemberBuilder(ALICE).withMemberRoles(VALID_MEMBER_ROLE_PRESIDENT).build();
+        editedAlice = new MemberBuilder(ALICE).withMemberRoles(VALID_MEMBER_ROLE_TREASURER).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

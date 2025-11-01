@@ -25,11 +25,11 @@ public class MemberRole extends Role {
         }
 
         MemberRole otherRole = (MemberRole) other;
-        return roleName.equals(otherRole.roleName);
+        return roleName.equalsIgnoreCase(otherRole.roleName);
     }
 
     @Override
     public int hashCode() {
-        return roleName.hashCode();
+        return roleName.toLowerCase().hashCode();
     }
 }
