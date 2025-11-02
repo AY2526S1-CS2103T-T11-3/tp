@@ -20,7 +20,7 @@ import seedu.club.model.member.Member;
  */
 public class AddMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "addMember";
+    public static final String COMMAND_WORD = "addmember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list. "
             + "Parameters: "

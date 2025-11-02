@@ -23,7 +23,7 @@ import seedu.club.model.role.EventRole;
  * Removes an event role from a member.
  */
 public class UnassignEventRoleCommand extends Command {
-    public static final String COMMAND_WORD = "unassignEventRole";
+    public static final String COMMAND_WORD = "unassigneventRole";
     public static final String MESSAGE_SUCCESS_EVENT_ROLE =
             "The event role(s) has/have been unassigned from the member successfully.";
 

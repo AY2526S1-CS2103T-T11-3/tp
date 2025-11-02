@@ -17,7 +17,7 @@ import seedu.club.model.name.NameContainsKeywordsPredicate;
  * Keyword matching is case-insensitive.
  */
 public class FindEventCommand extends Command {
-    public static final String COMMAND_WORD = "findEvent";
+    public static final String COMMAND_WORD = "findevent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

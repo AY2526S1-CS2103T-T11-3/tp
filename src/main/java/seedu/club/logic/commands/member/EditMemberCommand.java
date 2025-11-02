@@ -35,7 +35,7 @@ import seedu.club.model.role.MemberRole;
  */
 public class EditMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "editMember";
+    public static final String COMMAND_WORD = "editmember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "

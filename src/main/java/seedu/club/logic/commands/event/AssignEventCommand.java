@@ -24,7 +24,7 @@ import seedu.club.model.role.EventRole;
  * Assigns a member to an event in club book.
  */
 public class AssignEventCommand extends Command {
-    public static final String COMMAND_WORD = "assignEvent";
+    public static final String COMMAND_WORD = "assignevent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Assigns a member to an event with any specified role(s). "

@@ -13,7 +13,7 @@ import seedu.club.model.ViewState;
  */
 public class ListMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "listMembers";
+    public static final String COMMAND_WORD = "listmembers";
 
     public static final String MESSAGE_SUCCESS = "Listed all members";
     public static final String MESSAGE_EMPTY_LIST = "There are currently no members in the club";

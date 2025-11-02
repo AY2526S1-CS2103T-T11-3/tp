@@ -20,7 +20,7 @@ import seedu.club.model.member.Member;
  */
 public class DeleteMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteMember";
+    public static final String COMMAND_WORD = "deletemember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the member identified by the index number used in the displayed member list.\n"
