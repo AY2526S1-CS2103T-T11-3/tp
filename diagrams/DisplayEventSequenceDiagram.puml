@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClubBookParser" as ClubBookParser LOGIC_COLOR
+participant ":DisplayEventCommandParser" as DisplayEventCommandParser LOGIC_COLOR
+participant "d:DisplayEventCommand" as DisplayEventCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("event 1")
+activate LogicManager
+
+LogicManager -> ClubBookParser : parseCommand("event 1")
+activate ClubBookParser
+
+create DisplayEventCommandParser
+ClubBookParser -> DisplayEventCommandParser
+activate DisplayEventCommandParser
+
+DisplayEventCommandParser --> ClubBookParser
+deactivate DisplayEventCommandParser
+
+ClubBookParser -> DisplayEventCommandParser : parse("1")
+activate DisplayEventCommandParser
+
+create DisplayEventCommand
+DisplayEventCommandParser -> DisplayEventCommand
+activate DisplayEventCommand
+
+DisplayEventCommand --> DisplayEventCommandParser :
+deactivate DisplayEventCommand
+
+DisplayEventCommandParser --> ClubBookParser : d
+deactivate DisplayEventCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DisplayEventCommandParser -[hidden]-> ClubBookParser
+destroy DisplayEventCommandParser
+
+ClubBookParser --> LogicManager : d
+deactivate ClubBookParser
+
+LogicManager -> DisplayEventCommand : execute(m)
+activate DisplayEventCommand
+
+DisplayEventCommand -> Model : setViewState(ViewState.SINGLE_EVENT)
+activate Model
+Model --> DisplayEventCommand
+
+DisplayEventCommand -> Model : updateMemberAndEventList(...)
+
+Model --> DisplayEventCommand
+deactivate
+
+create CommandResult
+DisplayEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DisplayEventCommand
+deactivate CommandResult
+
+DisplayEventCommand --> LogicManager : r
+deactivate DisplayEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
