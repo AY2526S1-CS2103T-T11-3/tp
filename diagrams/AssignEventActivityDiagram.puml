@@ -35,7 +35,6 @@ if () then ([else])
 endif
 
 :Add member to event roster;
-:Update model with new event and member info;
 
 stop
 

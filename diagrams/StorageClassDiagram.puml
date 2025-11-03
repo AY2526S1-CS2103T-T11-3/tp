@@ -44,6 +44,7 @@ JsonSerializableClubBook --> "*" JsonAdaptedEvent
 JsonAdaptedEvent --> "*" JsonAdaptedEventRole
 JsonAdaptedEvent --> "*" JsonAdaptedMember
 JsonAdaptedMember --> "*" JsonAdaptedMemberRole
+JsonAdaptedMember --> "*" JsonAdaptedEventRole
 
 
 
