@@ -1,0 +1,44 @@
+@startuml
+|AssignEventCommand|
+start
+if () then ([event exists])
+  :Get Event;
+
+else ([else])
+  stop
+
+endif
+
+  if () then ([specified roles exist in event])
+  else ([else])
+    stop
+  endif
+
+if () then ([member exists])
+  :Get Member;
+else ([else])
+  stop
+
+
+endif
+
+
+if () then ([else])
+  stop
+else ([member does not exist in event roster])
+endif
+
+if () then ([else])
+  else ([roles are specified])
+  :Add specified event roles to member's event roles list;
+
+endif
+
+:Add member to event roster;
+:Update model with new event and member info;
+
+stop
+
+
+
+@enduml

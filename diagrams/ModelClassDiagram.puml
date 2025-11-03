@@ -55,7 +55,7 @@ UniqueEventList --> "~* all" Event
 Event *--> Name
 Event --> "*" Member
 Event --> "1 from" DateTime
-Event --> "0..1 to" DateTime
+Event --> "1 to" DateTime
 Event *--> "*" EventRole
 
 DateTime -[hidden]right-> Phone
